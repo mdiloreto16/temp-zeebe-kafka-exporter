@@ -22,11 +22,10 @@ import io.zeebe.exporters.kafka.config.toml.TomlProducerConfig;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TomlProducerConfigParser implements ConfigParser<TomlProducerConfig, ProducerConfig> {
-  static final List<String> DEFAULT_SERVERS = Collections.singletonList("localhost:9092");
+  static final String DEFAULT_SERVERS = "localhost:9092";
   static final String DEFAULT_CLIENT_ID = "zeebe";
   static final Duration DEFAULT_CLOSE_TIMEOUT = Duration.ofSeconds(20);
   static final Duration DEFAULT_REQUEST_TIMEOUT = Duration.ofSeconds(5);

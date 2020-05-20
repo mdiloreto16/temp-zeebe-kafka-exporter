@@ -15,7 +15,6 @@
  */
 package io.zeebe.exporters.kafka.config.toml;
 
-import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("squid:ClassVariableVisibilityCheck")
@@ -25,5 +24,5 @@ public class TomlProducerConfig {
   public Map<String, Object> config;
   public Integer maxConcurrentRequests;
   public Long requestTimeoutMs;
-  public List<String> servers;
+  public String servers;
 }

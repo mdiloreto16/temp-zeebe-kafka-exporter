@@ -51,7 +51,7 @@
     <version.protobuf>3.7.0</version.protobuf>
     <version.slf4j>1.7.26</version.slf4j>
     <version.testcontainers>1.11.3</version.testcontainers>
-    <version.zeebe>0.20.0</version.zeebe>
+    <version.zeebe>0.23.0</version.zeebe>
     <version.zeebe-exporter-protobuf>0.7.0</version.zeebe-exporter-protobuf>
 
     <!-- plugin version -->

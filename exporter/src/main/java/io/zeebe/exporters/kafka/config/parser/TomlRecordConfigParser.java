@@ -28,8 +28,7 @@ public class TomlRecordConfigParser implements ConfigParser<TomlRecordConfig, Re
 
     if (config.type != null) {
       parsed.setAllowedTypes(EnumSet.noneOf(RecordType.class));
-      config.type.forEach(
-          t -> parsed.getAllowedTypes().add(AllowedType.forName(t).getRecordType()));
+      parsed.getAllowedTypes().add(AllowedType.forName(config.type).getRecordType());
     }
 
     if (config.topic != null) {

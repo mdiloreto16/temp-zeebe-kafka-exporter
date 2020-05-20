@@ -23,15 +23,13 @@ import io.zeebe.exporters.kafka.config.toml.TomlRecordsConfig;
 import io.zeebe.exporters.kafka.record.AllowedType;
 import io.zeebe.protocol.record.RecordType;
 import io.zeebe.protocol.record.ValueType;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
 import org.junit.Test;
 
 public class TomlRecordsConfigParserTest {
   private static final Set<ValueType> EXPECTED_VALUE_TYPES =
-      EnumSet.complementOf(
-          EnumSet.of(ValueType.EXPORTER, ValueType.NULL_VAL, ValueType.SBE_UNKNOWN));
+      EnumSet.complementOf(EnumSet.of(ValueType.SBE_UNKNOWN, ValueType.NULL_VAL));
 
   private final TomlRecordsConfigParser parser = new TomlRecordsConfigParser();
 
@@ -74,6 +72,7 @@ public class TomlRecordsConfigParserTest {
     // when
     final RecordsConfig parsed = parser.parse(config);
 
+    EXPECTED_VALUE_TYPES.remove(ValueType.WORKFLOW_INSTANCE_RESULT);
     // then
     for (final ValueType type : EXPECTED_VALUE_TYPES) {
       assertThat(parsed.forType(type).getTopic()).isEqualTo(type.name());
@@ -86,8 +85,7 @@ public class TomlRecordsConfigParserTest {
     final TomlRecordsConfig config = new TomlRecordsConfig();
     config.defaults = new TomlRecordConfig();
     config.defaults.topic = "default";
-    config.defaults.type =
-        Arrays.asList(AllowedType.COMMAND.getTypeName(), AllowedType.REJECTION.getTypeName());
+    config.defaults.type = AllowedType.COMMAND.getTypeName();
 
     // when
     final RecordsConfig parsed = parser.parse(config);
@@ -98,8 +96,7 @@ public class TomlRecordsConfigParserTest {
         .forEach(
             (t, c) -> {
               assertThat(c.getTopic()).isEqualTo(config.defaults.topic);
-              assertThat(c.getAllowedTypes())
-                  .containsExactly(RecordType.COMMAND, RecordType.COMMAND_REJECTION);
+              assertThat(c.getAllowedTypes()).containsExactly(RecordType.COMMAND);
             });
   }
 

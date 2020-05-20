@@ -21,7 +21,6 @@ import static org.assertj.core.api.Assertions.entry;
 import io.zeebe.exporters.kafka.config.ProducerConfig;
 import io.zeebe.exporters.kafka.config.toml.TomlProducerConfig;
 import java.time.Duration;
-import java.util.Collections;
 import java.util.HashMap;
 import org.junit.Test;
 
@@ -59,7 +58,7 @@ public class TomlProducerConfigParserTest {
     // given
     final TomlProducerConfig config = new TomlProducerConfig();
     config.maxConcurrentRequests = 1;
-    config.servers = Collections.singletonList("localhost:3000");
+    config.servers = "localhost:3000";
     config.clientId = "client";
     config.closeTimeoutMs = 3000L;
     config.requestTimeoutMs = 3000L;
@@ -79,7 +78,7 @@ public class TomlProducerConfigParserTest {
             "config")
         .containsExactly(
             1,
-            Collections.singletonList("localhost:3000"),
+            "localhost:3000",
             "client",
             Duration.ofSeconds(3),
             Duration.ofSeconds(3),

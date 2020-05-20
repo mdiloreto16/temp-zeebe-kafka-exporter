@@ -16,7 +16,6 @@
 package io.zeebe.exporters.kafka.config;
 
 import java.time.Duration;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -26,7 +25,7 @@ public class ProducerConfig {
   private Map<String, Object> config;
   private int maxConcurrentRequests;
   private Duration requestTimeout;
-  private List<String> servers;
+  private String servers;
 
   public String getClientId() {
     return clientId;
@@ -68,11 +67,11 @@ public class ProducerConfig {
     this.requestTimeout = requestTimeout;
   }
 
-  public List<String> getServers() {
+  public String getServers() {
     return servers;
   }
 
-  public void setServers(List<String> servers) {
+  public void setServers(String servers) {
     this.servers = servers;
   }
 

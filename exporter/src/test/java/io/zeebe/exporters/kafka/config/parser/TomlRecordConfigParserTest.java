@@ -22,8 +22,6 @@ import io.zeebe.exporters.kafka.config.RecordConfig;
 import io.zeebe.exporters.kafka.config.toml.TomlRecordConfig;
 import io.zeebe.exporters.kafka.record.AllowedType;
 import io.zeebe.protocol.record.RecordType;
-import java.util.Arrays;
-import java.util.Collections;
 import org.junit.Test;
 
 public class TomlRecordConfigParserTest {
@@ -33,14 +31,13 @@ public class TomlRecordConfigParserTest {
   public void shouldParseAllowedTypes() {
     // given
     final TomlRecordConfig config = new TomlRecordConfig();
-    config.type = Arrays.asList(AllowedType.COMMAND.getTypeName(), AllowedType.EVENT.getTypeName());
+    config.type = AllowedType.EVENT.getTypeName();
 
     // when
     final RecordConfig parsed = parser.parse(config);
 
     // then
-    assertThat(parsed.getAllowedTypes())
-        .containsExactlyInAnyOrder(RecordType.COMMAND, RecordType.EVENT);
+    assertThat(parsed.getAllowedTypes()).containsExactlyInAnyOrder(RecordType.EVENT);
   }
 
   @Test
@@ -73,7 +70,7 @@ public class TomlRecordConfigParserTest {
   public void shouldThrowExceptionIfAllowedTypeIsUnknown() {
     // given
     final TomlRecordConfig config = new TomlRecordConfig();
-    config.type = Collections.singletonList("something unlikely");
+    config.type = "something unlikely";
 
     // when - then
     assertThatThrownBy(() -> parser.parse(config)).isInstanceOf(IllegalArgumentException.class);

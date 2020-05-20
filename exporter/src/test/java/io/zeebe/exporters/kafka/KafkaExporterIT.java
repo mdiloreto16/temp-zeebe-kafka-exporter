@@ -119,7 +119,7 @@ public class KafkaExporterIT {
     final TomlConfig configuration = new TomlConfig();
     configuration.maxInFlightRecords = 30;
     configuration.producer = new TomlProducerConfig();
-    configuration.producer.servers = Collections.singletonList(getKafkaServer());
+    configuration.producer.servers = getKafkaServer();
 
     return configuration;
   }
