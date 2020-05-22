@@ -1,10 +1,6 @@
-## Configuration
+## YAML Configuration
 
 A sample configuration file is included in the project under `application.yaml`.
-
-> NOTE: there is currently a bug where the TOML parser used in Zeebe parses all numbers as doubles, which if passed
-directly as `ProducerConfig` may cause errors. It's recommended for now to use the extra config arguments for
-non-numerial values until that's fixed.
 
 ```yaml
 - id: kafka
